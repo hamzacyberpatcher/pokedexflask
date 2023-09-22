@@ -2,6 +2,9 @@
 {% block title %}
 	{{ pokedata["name"] | name }}
 {% endblock %}
+{% block favicon %}
+<link rel="icon" type="image/png" href="{{ pokedata.favicon }}">
+{% endblock %}
 {% block body %}
 	<div class="row">
 		<div class="col-sm">
