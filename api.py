@@ -115,10 +115,9 @@ def Pokemon(pokemon):
 	for evolve_into in evolves_into:
 		evolvesInto.append(evolve_into["name"])
 
-	if len(evolvesInto) == 0:
-		evolvesInto.append("None")
-
 	sprite = resp2.json()["sprites"]["other"]["official-artwork"]["front_default"]
+
+	types = ', '.join(types)
 
 	pokedata = {}
 	pokedata["number"] = number
@@ -126,14 +125,14 @@ def Pokemon(pokemon):
 	pokedata["rank"] = pokerank
 	pokedata["generation"] = generation
 	pokedata["evolves_from"] = evolves_from
-	pokedata["evolves_into"] = evolves_into
+	pokedata["evolves_into"] = evolvesInto
 	pokedata["types"] = types
-	pokedata["hp"] = hp
-	pokedata["atk"] = atk
-	pokedata["def"] = defense
-	pokedata["spatk"] = spatk
-	pokedata["spdef"] = spdef
-	pokedata["speed"] = speed
+	pokedata["hp"] = int(hp)
+	pokedata["atk"] = int(atk)
+	pokedata["def"] = int(defense)
+	pokedata["spatk"] = int(spatk)
+	pokedata["spdef"] = int(spdef)
+	pokedata["speed"] = int(speed)
 	pokedata["total"] = total
 	pokedata["desc"] = description
 	pokedata["height"] = height
