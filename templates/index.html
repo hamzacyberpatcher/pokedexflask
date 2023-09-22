@@ -5,7 +5,7 @@
 {% block body %}
 	<form action="/search">
 		<div class="d-flex align-items-center justify-content-center my-6">
-			<input type="text" class="form-control" style="width:35%;display:inline;" list="pokemons" name="pokemon">
+			<input type="text" class="form-control" style="width:35%;display:inline;" list="pokemons" name="pokemon" autofocus autocomplete="off" placeholder = "Enter Pokemon's name or number">
 			<datalist id="pokemons" style="height:50px;overflow:auto;">
 				{% for pokename in pokelist %}
 				<option value="{{ pokename["name"] }}">{{ pokename["name"] }}</option>
