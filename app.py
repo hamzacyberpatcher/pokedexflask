@@ -1,9 +1,12 @@
-from api import Pokemon,listpokemon
+from api import Pokemon,listpokemon,name,weight,height
 from flask import Flask, render_template, request, redirect
 from cs50 import SQL
 
 
 app = Flask(__name__)
+app.jinja_env.filters["name"] = name
+app.jinja_env.filters["weight"] = weight
+app.jinja_env.filters["height"] = height
 
 @app.route("/")
 def index():

@@ -135,8 +135,8 @@ def Pokemon(pokemon):
 	pokedata["speed"] = int(speed)
 	pokedata["total"] = total
 	pokedata["desc"] = description
-	pokedata["height"] = height
-	pokedata["weight"] = weight
+	pokedata["height"] = int(height)
+	pokedata["weight"] = int(weight)
 	pokedata["abilities"] = abilities
 	pokedata["sprite"] = sprite
 	return pokedata
@@ -144,3 +144,17 @@ def Pokemon(pokemon):
 def listpokemon():
 	pokelist = db.execute("SELECT name FROM evolutions")
 	return pokelist
+
+def name(value):
+	value = value.capitalize()
+	value = value.replace("-"," ")
+	return value
+
+def weight(value):
+	value = value / 10
+	return f"{value:,.1f}kg"
+
+def height(value):
+	value = value / 10
+	f = value * 3.281
+	return f"{f:.1f}ft"

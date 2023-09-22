@@ -1,39 +1,39 @@
 {% extends 'layout.html' %}
 {% block title %}
-	{{ pokedata["name"] }}
+	{{ pokedata["name"] | name }}
 {% endblock %}
 {% block body %}
 	<div class="row">
 		<div class="col-sm">
 			<center>
-			<img src="{{ pokedata.sprite }}" alt="{{ pokedata.name }}">
+			<img src="{{ pokedata.sprite }}" alt="{{ pokedata.name | name }}">
 			</center>
 		</div>
 		<div class="col-sm p-5">
-			<b>Name</b> : {{ pokedata.name }}<br>
+			<b>Name</b> : {{ pokedata.name | name }}<br>
 			<b>Number</b> : {{ pokedata.number }}<br>
 			<b>Pokemon's Rank</b> : {{ pokedata.rank }}<br>
 			<b>Pokemon's Generation</b> : {{ pokedata.generation }}<br>
-			<b>Type</b> : {{ pokedata.types }}<br>
-			<b>Height</b> : {{ pokedata.height }}<br>
-			<b>Weight</b> : {{ pokedata.weight }}<br>
+			<b>Type</b> : {{ pokedata.types | name }}<br>
+			<b>Height</b> : {{ pokedata.height | height }}<br>
+			<b>Weight</b> : {{ pokedata.weight | weight }}<br>
 		</div>
 		<div class="row container-fluid1">
 			<div style="display: inline;">
 				{% if pokedata.evolves_from == "nothing" %}
 					<b>Pokemon evolves from nothing</b><br>
 				{% else %}
-					<b>Pokemon evolves from </b>: <a href="/search?pokemon={{ pokedata.evolves_from }}">{{ pokedata.evolves_from }}</a><br>
+					<b>Pokemon evolves from </b>: <a href="/search?pokemon={{ pokedata.evolves_from }}">{{ pokedata.evolves_from | name }}</a><br>
 				{% endif %}
 			</div>
 			<div style="display: inline;">
 				{% if not pokedata.evolves_into %}
 					<b>This pokemon doesnot evovle</b>
 				{% else %}
-					<b>This pokemon evolves into</b> :
+					<b>This pokemon can evolve</b> :
 					<ul class="list-inline">
 						{% for pokemon in pokedata.evolves_into %}
-							<li class="list-inline-item"><a href="/search?pokemon={{ pokemon }}">{{ pokemon }}</a></li>
+							<li class="list-inline-item"><a href="/search?pokemon={{ pokemon }}">{{ pokemon | name }}</a></li>
 						{% endfor %}
 					</ul>
 				{% endif %}
@@ -85,7 +85,7 @@
 			<center><h1><b>Abilities : </b></h1></center>
 			<dl>
 				{% for ability in pokedata.abilities %}
-				<dt>Name : {{ ability["name"] }}</dt>
+				<dt>Name : {{ ability["name"] | name }}</dt>
 				<dt>Is it hidden : {{ ability["is_hidden"] }}</dt>
 				<dd>{{ ability["desc"] }}</dd>
 				{% endfor %}
