@@ -1,4 +1,6 @@
 import requests
+from cs50 import SQL
+db = SQL("sqlite:///evolutions.db")
 
 def internet_connection():
     try:
@@ -7,15 +9,11 @@ def internet_connection():
     except requests.ConnectionError:
         return False 
 
-def main():
+def Pokemon(pokemon):
 
 	if not internet_connection():
 		print("Unable to connect. Check your internet connection.")
-		return 1
-
-
-	pokemon = input("Enter the pokemon's name or id : ")
-
+		return None
 	pokemon = pokemon.lower()
 
 	pokemon = pokemon.replace(" ","-")
@@ -28,7 +26,7 @@ def main():
 
 	if resp1.status_code != 200:
 		print("404 Pokemon Not Found")
-		return 404
+		return None
 
 	number = resp1.json()["id"]
 
@@ -114,8 +112,6 @@ def main():
 		pokerank = "ordinary"
 
 	# imported the library here because elsewise it showed stupid debug data
-	from cs50 import SQL
-	db = SQL("sqlite:///evolutions.db")
 	evolves_into = db.execute("SELECT name FROM evolutions WHERE evolves_from = ?",name)
 	evolvesInto = []
 	for evolve_into in evolves_into:
@@ -126,38 +122,57 @@ def main():
 
 	sprite = resp2.json()["sprites"]["other"]["official-artwork"]["front_default"]
 
-	print("\n")
-	print("Pokemon id : ",number)
-	print("Pokemon name : ",name)
-	print("Pokemon's Rank : ",pokerank)
-	print("Pokemon Generation : ",generation)
-	print("This pokemon evolves from ",evolves_from)
-	print("This pokemon evolves into : ",end="")
-	print(", ".join(evolvesInto))
-	print("Types : ",end="")
-	print(", ".join(types))
-	print("\n")
-	print("Statistics : ")
-	print("HP : ",hp)
-	print("Attack : ",atk)
-	print("Defense : ",defense)
-	print("Special Attck : ",spatk)
-	print("Special Defense : ",spdef)
-	print("Speed : ",speed)
-	print("Total : ",total)
-	print("\n")
-	print("Pokemon description : ",description)
-	print("\n")
-	print("Pokemon's height in decimeters : ",height)
-	print("Pokemon's weight in hectograms : ",weight)
-	print("\n")
-	print("Abilities : ")
-	for ability in abilities:
-		print("Ability : ",ability["name"])
-		print("Is hidden : ",ability["is_hidden"])
-		print("Description : ",ability["desc"])
-		print("-"*80)
-	print("Pokemon's sprite : ",sprite)
+	# print("\n")
+	# print("Pokemon id : ",number)
+	# print("Pokemon name : ",name)
+	# print("Pokemon's Rank : ",pokerank)
+	# print("Pokemon Generation : ",generation)
+	# print("This pokemon evolves from ",evolves_from)
+	# print("This pokemon evolves into : ",end="")
+	# print(", ".join(evolvesInto))
+	# print("Types : ",end="")
+	# print(", ".join(types))
+	# print("\n")
+	# print("Statistics : ")
+	# print("HP : ",hp)
+	# print("Attack : ",atk)
+	# print("Defense : ",defense)
+	# print("Special Attck : ",spatk)
+	# print("Special Defense : ",spdef)
+	# print("Speed : ",speed)
+	# print("Total : ",total)
+	# print("\n")
+	# print("Pokemon description : ",description)
+	# print("\n")
+	# print("Pokemon's height in decimeters : ",height)
+	# print("Pokemon's weight in hectograms : ",weight)
+	# print("\n")
+	# print("Abilities : ")
+	# for ability in abilities:
+	# 	print("Ability : ",ability["name"])
+	# 	print("Is hidden : ",ability["is_hidden"])
+	# 	print("Description : ",ability["desc"])
+	# 	print("-"*80)
+	# print("Pokemon's sprite : ",sprite)
 
-if __name__ == "__main__":
-	main()
+	pokedata = {}
+	pokedata["number"] = number
+	pokedata["name"] = name
+	pokedata["rank"] = pokerank
+	pokedata["generation"] = generation
+	pokedata["evolves_from"] = evolves_from
+	pokedata["evolves_into"] = evolves_into
+	pokedata["types"] = types
+	pokedata["hp"] = hp
+	pokedata["atk"] = atk
+	pokedata["def"] = defense
+	pokedata["spatk"] = spatk
+	pokedata["spdef"] = spdef
+	pokedata["speed"] = speed
+	pokedata["total"] = total
+	pokedata["desc"] = description
+	pokedata["height"] = height
+	pokedata["weight"] = weight
+	pokedata["abilities"] = abilities
+	pokedata["sprite"] = sprite
+	return pokedata
