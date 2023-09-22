@@ -12,7 +12,6 @@ def internet_connection():
 def Pokemon(pokemon):
 
 	if not internet_connection():
-		print("Unable to connect. Check your internet connection.")
 		return None
 	pokemon = pokemon.lower()
 
@@ -25,7 +24,6 @@ def Pokemon(pokemon):
 	resp1 = requests.get(baseURL1 + pokemon)
 
 	if resp1.status_code != 200:
-		print("404 Pokemon Not Found")
 		return None
 
 	number = resp1.json()["id"]
@@ -122,39 +120,6 @@ def Pokemon(pokemon):
 
 	sprite = resp2.json()["sprites"]["other"]["official-artwork"]["front_default"]
 
-	# print("\n")
-	# print("Pokemon id : ",number)
-	# print("Pokemon name : ",name)
-	# print("Pokemon's Rank : ",pokerank)
-	# print("Pokemon Generation : ",generation)
-	# print("This pokemon evolves from ",evolves_from)
-	# print("This pokemon evolves into : ",end="")
-	# print(", ".join(evolvesInto))
-	# print("Types : ",end="")
-	# print(", ".join(types))
-	# print("\n")
-	# print("Statistics : ")
-	# print("HP : ",hp)
-	# print("Attack : ",atk)
-	# print("Defense : ",defense)
-	# print("Special Attck : ",spatk)
-	# print("Special Defense : ",spdef)
-	# print("Speed : ",speed)
-	# print("Total : ",total)
-	# print("\n")
-	# print("Pokemon description : ",description)
-	# print("\n")
-	# print("Pokemon's height in decimeters : ",height)
-	# print("Pokemon's weight in hectograms : ",weight)
-	# print("\n")
-	# print("Abilities : ")
-	# for ability in abilities:
-	# 	print("Ability : ",ability["name"])
-	# 	print("Is hidden : ",ability["is_hidden"])
-	# 	print("Description : ",ability["desc"])
-	# 	print("-"*80)
-	# print("Pokemon's sprite : ",sprite)
-
 	pokedata = {}
 	pokedata["number"] = number
 	pokedata["name"] = name
@@ -176,3 +141,7 @@ def Pokemon(pokemon):
 	pokedata["abilities"] = abilities
 	pokedata["sprite"] = sprite
 	return pokedata
+
+def listpokemon():
+	pokelist = db.execute("SELECT name FROM evolutions")
+	return pokelist
