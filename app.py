@@ -2,6 +2,7 @@ from api import Pokemon,listpokemon
 from flask import Flask, render_template, request, redirect
 from cs50 import SQL
 
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -14,3 +15,5 @@ def search():
 	pokedata = Pokemon(pokemon)
 	if pokedata == None:
 		return render_template("failure.html")
+
+	return render_template("pokemon.html",pokedata=pokedata)
