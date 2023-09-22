@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+{% block title %}
+	{{ pokedata["name"] }}
+{% endblock %}
+{% block body %}
+	<div class="row">
+		<div class="col-sm">
+			<center>
+			<img src="{{ pokedata.sprite }}" alt="{{ pokedata.name }}">
+			</center>
+		</div>
+		<div class="col-sm p-5">
+			<b>Name</b> : {{ pokedata.name }}<br>
+			<b>Number</b> : {{ pokedata.number }}<br>
+			<b>Pokemon's Rank</b> : {{ pokedata.rank }}<br>
+			<b>Pokemon's Generation</b> : {{ pokedata.generation }}<br>
+			<b>Type</b> : {{ pokedata.types }}<br>
+			<b>Height</b> : {{ pokedata.height }}<br>
+			<b>Weight</b> : {{ pokedata.weight }}<br>
+		</div>
+		<div class="row container-fluid1">
+			<div style="display: inline;">
+				{% if pokedata.evolves_from == "nothing" %}
+					<b>Pokemon evolves from nothing</b><br>
+				{% else %}
+					<b>Pokemon evolves from </b>: <a href="/search?pokemon={{ pokedata.evolves_from }}">{{ pokedata.evolves_from }}</a><br>
+				{% endif %}
+			</div>
+			<div style="display: inline;">
+				{% if not pokedata.evolves_into %}
+					<b>This pokemon doesnot evovle</b>
+				{% else %}
+					<b>This pokemon evolves into</b> :
+					<ul class="list-inline">
+						{% for pokemon in pokedata.evolves_into %}
+							<li class="list-inline-item"><a href="/search?pokemon={{ pokemon }}">{{ pokemon }}</a></li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div>
+		</div>
+		<div class="row container-fluid1">
+			<h1>Description</h1>
+			<p>{{ pokedata.desc }}</p>
+		</div>
+		<div id="container"></div>
+		<script>
+		
+		var chart = new ej.charts.Chart({
+		//Initializing Primary X Axis
+		primaryXAxis: {
+		valueType: 'Category',
+		title: 'Stats',
+		},
+		//Initializing Primary Y Axis
+		primaryYAxis: {
+		title: 'Value'
+		},
+					title: "Pokemon's stats",
+		//Initializing Chart Series
+		series: [
+		{
+			marker: {
+		visible: true,
+		dataLabel: { visible: true },
+		},
+		type: 'Column',
+		dataSource: [
+		{ stat: "HP", value: {{ pokedata.hp | safe }} },
+		{ stat: "Attack", value: {{ pokedata.atk | safe }} },
+		{ stat: "Defense", value: {{ pokedata.def | safe }} },
+		{ stat: "Special Attack", value: {{ pokedata.spatk | safe}} },
+		{ stat: "Special Defense", value: {{ pokedata.spdef | safe}} },
+		{ stat: "Speed", value: {{ pokedata.speed | safe}} },
+		],
+		xName: 'stat',
+		yName: 'value',
+		}
+		],
+		tooltip: {enable: true},
+		});
+		chart.appendTo('#container');
+		</script>
+		<div class="row container-fluid1">
+			<center><h1><b>Abilities : </b></h1></center>
+			<dl>
+				{% for ability in pokedata.abilities %}
+				<dt>Name : {{ ability["name"] }}</dt>
+				<dt>Is it hidden : {{ ability["is_hidden"] }}</dt>
+				<dd>{{ ability["desc"] }}</dd>
+				{% endfor %}
+			</dl>
+		</div>
+	{% endblock %}
