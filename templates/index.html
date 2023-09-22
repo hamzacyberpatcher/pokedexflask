@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block title %}
+	Search
+{% endblock %}
+{% block body %}
+	<form action="/search">
+		<div class="d-flex align-items-center justify-content-center my-6">
+			<input type="text" class="form-control" style="width:35%;display:inline;" list="pokemons" name="pokemon">
+			<datalist id="pokemons" style="height:50px;overflow:auto;">
+				{% for pokename in pokelist %}
+				<option value="{{ pokename["name"] }}">{{ pokename["name"] }}</option>
+				{% endfor %}
+			</datalist>
+			<button class="btn btn-light mx-2" type="submit">Search</button>
+		</div>
+	</form>
+{% endblock %}
