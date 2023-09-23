@@ -52,7 +52,9 @@ def Pokemon(pokemon):
 	types = []
 
 	for type_resp in types_resp:
-		types.append(type_resp["type"]["name"])
+		typename = type_resp["type"]["name"]
+		typename = typename.capitalize()
+		types.append(typename)
 
 
 	flavor_text_entries = resp1.json()["flavor_text_entries"]
