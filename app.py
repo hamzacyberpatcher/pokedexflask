@@ -17,6 +17,6 @@ def search():
 	pokemon = request.args.get("pokemon")
 	pokedata = Pokemon(pokemon)
 	if pokedata == None:
-		return render_template("failure.html",pokemon=pokemon)
+		return render_template("failure.html",pokemon=pokemon,pokelist=listpokemon())
 
-	return render_template("pokemon.html",pokedata=pokedata)
+	return render_template("pokemon.html",pokedata=pokedata,pokelist=listpokemon())
