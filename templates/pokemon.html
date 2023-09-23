@@ -50,35 +50,35 @@
 
 	
 
-
-<div>
-  <canvas id="myChart" style="width:100%;height:auto"></canvas>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-  const ctx = document.getElementById('myChart');
-
-  new Chart(ctx, {
-    type: 'radar',
-    data: {
-      labels: ['HP', 'Attack', 'Defense', 'Special Attack', 'Special Defense', 'Speed'],
-      datasets: [{
-        label: 'Values',
-        data: [{{ pokedata.hp | safe }}, {{ pokedata.atk | safe }}, {{ pokedata.def | safe }}, {{ pokedata.spatk | safe }}, {{ pokedata.spdef | safe }}, {{ pokedata.speed | safe }}],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</script>
+<center><h1>Pokemon's Stats</h1></center>
+<canvas id="chartId" aria-label="chart" height="350" width="580"></canvas>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
+   <script>
+      var chrt = document.getElementById("chartId").getContext("2d");
+      var chartId = new Chart(chrt, {
+         type: 'radar',
+         data: {
+            labels: ["HP", "Attack", "Defense", "Special Attack", "Special Defense", "Speed"],
+            datasets: [{
+               label: "Stat Value",
+               data: [{{ pokedata.hp | safe }}, {{ pokedata.atk | safe }},{{ pokedata.def | safe }},{{ pokedata.spatk | safe }},{{ pokedata.spdef | safe }}, {{ pokedata.speed | safe }}],
+               backgroundColor: ['lightgrey'],
+               pointBackgroundColor: ['yellow', 'aqua', 'pink', 'lightgreen', 'lightblue', 'brown'],
+               borderColor: ['black'],
+               borderWidth: 1,
+               pointRadius: 6,
+            }],
+         },
+         options: {
+            responsive: true,
+            elements: {
+               line: {
+                  borderWidth: 3
+               }
+            }
+         },
+      });
+   </script>
 		<div class="row container-fluid1">
 			<center><h1><b>Abilities : </b></h1></center>
 			<dl>
