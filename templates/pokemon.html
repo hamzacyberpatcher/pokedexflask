@@ -3,7 +3,7 @@
 	{{ pokedata["name"] | name }}
 {% endblock %}
 {% block favicon %}
-<link rel="icon" type="image/png" href="{{ pokedata.favicon }}">
+	<link rel="icon" type="image/png" href="{{ pokedata.favicon }}">
 {% endblock %}
 {% block body %}
 	<div class="row">
@@ -46,51 +46,46 @@
 			<h1>Description</h1>
 			<p>{{ pokedata.desc }}</p>
 		</div>
-		<div id="container" style="width:100%;height:auto"></div>
-		<script>
-		
-		var chart = new ej.charts.Chart({
-		//Initializing Primary X Axis
-		primaryXAxis: {
-		valueType: 'Category',
-		title: 'Stats',
-		},
-		//Initializing Primary Y Axis
-		primaryYAxis: {
-		title: 'Value'
-		},
-					title: "Pokemon's stats",
-		//Initializing Chart Series
-		series: [
-		{
-			marker: {
-		visible: true,
-		dataLabel: { visible: true },
-		},
-		type: 'Column',
-		dataSource: [
-		{ stat: "HP", value: {{ pokedata.hp | safe }} },
-		{ stat: "Attack", value: {{ pokedata.atk | safe }} },
-		{ stat: "Defense", value: {{ pokedata.def | safe }} },
-		{ stat: "Special Attack", value: {{ pokedata.spatk | safe}} },
-		{ stat: "Special Defense", value: {{ pokedata.spdef | safe}} },
-		{ stat: "Speed", value: {{ pokedata.speed | safe}} },
-		],
-		xName: 'stat',
-		yName: 'value',
-		}
-		],
-		tooltip: {enable: true},
-		});
-		chart.appendTo('#container');
-		</script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js" integrity="sha512-7U4rRB8aGAHGVad3u2jiC7GA5/1YhQcQjxKeaVms/bT66i3LVBMRcBI9KwABNWnxOSwulkuSXxZLGuyfvo7V1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	
+
+
+<div>
+  <canvas id="myChart" style="width:100%;height:auto"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['HP', 'Attack', 'Defense', 'Special Attack', 'Special Defense', 'Speed'],
+      datasets: [{
+        label: 'Values',
+        data: [{{ pokedata.hp | safe }}, {{ pokedata.atk | safe }}, {{ pokedata.def | safe }}, {{ pokedata.spatk | safe }}, {{ pokedata.spdef | safe }}, {{ pokedata.speed | safe }}],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
 		<div class="row container-fluid1">
 			<center><h1><b>Abilities : </b></h1></center>
 			<dl>
 				{% for ability in pokedata.abilities %}
-				<dt>Name : {{ ability["name"] | name }}</dt>
-				<dt>Is it hidden : {{ ability["is_hidden"] }}</dt>
-				<dd>{{ ability["desc"] }}</dd>
+					<dt>Name : {{ ability["name"] | name }}</dt>
+					<dt>Is it hidden : {{ ability["is_hidden"] }}</dt>
+					<dd>{{ ability["desc"] }}</dd>
 				{% endfor %}
 			</dl>
 		</div>
