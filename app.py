@@ -8,15 +8,17 @@ app.jinja_env.filters["name"] = name
 app.jinja_env.filters["weight"] = weight
 app.jinja_env.filters["height"] = height
 
+pokelist = listpokemon()
+
 @app.route("/")
 def index():
-	return render_template("index.html",pokelist=listpokemon())
+	return render_template("index.html",pokelist=pokelist)
 
 @app.route("/search")
 def search():
 	pokemon = request.args.get("pokemon")
 	pokedata = Pokemon(pokemon)
 	if pokedata == None:
-		return render_template("failure.html",pokemon=pokemon,pokelist=listpokemon())
+		return render_template("failure.html",pokemon=pokemon,pokelist=pokelist)
 
-	return render_template("pokemon.html",pokedata=pokedata,pokelist=listpokemon())
+	return render_template("pokemon.html",pokedata=pokedata,pokelist=pokelist)
