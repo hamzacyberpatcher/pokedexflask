@@ -69,7 +69,7 @@
       var chartId = new Chart(chrt, {
          type: 'radar',
          data: {
-            labels: ["HP", "Attack", "Defense", "Special Attack", "Special Defense", "Speed"],
+            labels: ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"],
             datasets: [{
                label: "Stat Value",
                data: [{{ pokedata.hp | safe }}, {{ pokedata.atk | safe }},{{ pokedata.def | safe }},{{ pokedata.spatk | safe }},{{ pokedata.spdef | safe }}, {{ pokedata.speed | safe }}],
