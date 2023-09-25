@@ -122,7 +122,7 @@ def Pokemon(pokemon):
 	types = ', '.join(types)
 
 	pokedata = {}
-	pokedata["number"] = number
+	pokedata["number"] = int(number)
 	pokedata["name"] = name
 	pokedata["rank"] = pokerank
 	pokedata["generation"] = generation
