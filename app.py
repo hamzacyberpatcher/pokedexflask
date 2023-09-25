@@ -23,6 +23,7 @@ bgcolor = [
 ]
 
 pokelist = listpokemon()
+pokenamelength = len(pokelist)
 
 @app.route("/")
 def index():
@@ -37,11 +38,11 @@ def search():
 	if pokedata == None:
 		return render_template("failure.html",pokemon=pokemon,pokelist=pokelist,bgcolor=bgcolor[n])
 
-	return render_template("pokemon.html",pokedata=pokedata,pokelist=pokelist,bgcolor=bgcolor[n])
+	return render_template("pokemon.html",pokedata=pokedata,pokelist=pokelist,bgcolor=bgcolor[n],maxlength=pokenamelength)
 
 @app.route("/random")
 def ran():
 	n = random.randint(0,len(pokelist) - 1)
 	pokedata = Pokemon(pokelist[n]["name"])
 	bg = random.randint(0,len(bgcolor) - 1)
-	return render_template("pokemon.html",pokedata=pokedata,pokelist=pokelist,bgcolor=bg)
+	return render_template("pokemon.html",pokedata=pokedata,pokelist=pokelist,bgcolor=bg,maxlength=pokenamelength)

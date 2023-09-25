@@ -6,19 +6,19 @@
 	<link rel="icon" type="image/png" href="{{ pokedata.favicon }}">
 {% endblock %}
 {% block body %}
-<form action="/search">
-		<div class="d-flex align-items-center justify-content-center my-6">
+		<form action="/search">
+			<div class="d-flex align-items-center justify-content-center my-6">
 			<input type="text" class="form-control" style="width:35%;display:inline;" list="pokemons" name="pokemon" autofocus autocomplete="off" placeholder = "Enter Pokemon's name or number">
 			<datalist id="pokemons" style="height:50px;overflow:auto;">
-				{% for pokename in pokelist %}
+			{% for pokename in pokelist %}
 				<option value="{{ pokename["name"] | name }}">{{ pokename["name"] | name }}</option>
-				{% endfor %}
+			{% endfor %}
 			</datalist>
 			<button class="btn btn-light mx-2" type="submit">Search</button>
-	</form>
-	<form action="/random">
-		<button class="btn btn-light m-2" type="submit">Random</button>
-	</form>
+		</form>
+		<form action="/random">
+			<button class="btn btn-light m-2" type="submit">Random</button>
+		</form>
 	</div>
 	<div class="row">
 		<div class="col-sm">
@@ -60,39 +60,37 @@
 			<h1>Description</h1>
 			<p>{{ pokedata.desc }}</p>
 		</div>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js" integrity="sha512-7U4rRB8aGAHGVad3u2jiC7GA5/1YhQcQjxKeaVms/bT66i3LVBMRcBI9KwABNWnxOSwulkuSXxZLGuyfvo7V1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-	
-
-<center><h1>Pokemon's Stats</h1></center>
-<canvas id="chartId" aria-label="chart" height="350" width="580"></canvas>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
-   <script>
-      var chrt = document.getElementById("chartId").getContext("2d");
-      var chartId = new Chart(chrt, {
-         type: 'radar',
-         data: {
-            labels: ["HP", "Attack", "Defense", "Speed", "Sp. Def", "Sp. Atk"],
-            datasets: [{
-               label: "Stat Value",
-               data: [{{ pokedata.hp | safe }}, {{ pokedata.atk | safe }},{{ pokedata.def | safe }},{{ pokedata.speed | safe }},{{ pokedata.spdef | safe }}, {{ pokedata.spatk | safe }}],
-               backgroundColor: ['lightgrey'],
-               pointBackgroundColor: ['yellow', 'aqua', 'pink', 'lightgreen', 'lightblue', 'brown'],
-               borderColor: ['black'],
-               borderWidth: 1,
-               pointRadius: 6,
-            }],
-         },
-         options: {
-            responsive: true,
-            elements: {
-               line: {
-                  borderWidth: 3
-               }
-            }
-         },
-      });
-   </script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js" integrity="sha512-7U4rRB8aGAHGVad3u2jiC7GA5/1YhQcQjxKeaVms/bT66i3LVBMRcBI9KwABNWnxOSwulkuSXxZLGuyfvo7V1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		
+		<center><h1>Pokemon's Stats</h1></center>
+		<canvas id="chartId" aria-label="chart" height="350" width="580"></canvas>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
+		<script>
+		var chrt = document.getElementById("chartId").getContext("2d");
+		var chartId = new Chart(chrt, {
+		type: 'radar',
+		data: {
+		labels: ["HP", "Attack", "Defense", "Speed", "Sp. Def", "Sp. Atk"],
+		datasets: [{
+		label: "Stat Value",
+		data: [{{ pokedata.hp | safe }}, {{ pokedata.atk | safe }},{{ pokedata.def | safe }},{{ pokedata.speed | safe }},{{ pokedata.spdef | safe }}, {{ pokedata.spatk | safe }}],
+		backgroundColor: ['lightgrey'],
+		pointBackgroundColor: ['yellow', 'aqua', 'pink', 'lightgreen', 'lightblue', 'brown'],
+		borderColor: ['black'],
+		borderWidth: 1,
+		pointRadius: 6,
+		}],
+		},
+		options: {
+		responsive: true,
+		elements: {
+		line: {
+		borderWidth: 3
+		}
+		}
+		},
+		});
+		</script>
 		<div class="row container-fluid1">
 			<center><h1><b>Abilities : </b></h1></center>
 			<dl>
@@ -103,4 +101,22 @@
 				{% endfor %}
 			</dl>
 		</div>
-	{% endblock %}
+		<div class="d-flex align-items-center justify-content-between my-6">
+			{% if pokedata.number != 1 %}
+			<div>
+				<form action="/search">
+					<input type="hidden" name="pokemon" value="{{ pokedata.number - 1 }}">
+					<button class="btn btn-secondary" type="submit">Prev</button>
+				</form>
+			</div>
+			{% endif %}
+			{% if pokedata.number != maxlength %}
+			<div>
+				<form action="/search">
+					<input type="hidden" name="pokemon" value="{{ pokedata.number + 1 }}">
+					<button class="btn btn-secondary" type="submit">Next</button>
+				</form>				
+			</div>		
+			{% endif %}
+	</div>
+{% endblock %}
