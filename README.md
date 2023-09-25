@@ -1,4 +1,4 @@
-#Pokedex made using flask
+# Pokedex made using flask
 
 <h1>Details</h1>
 A pokedex made using python's flask module. Pokemon's data is obtained using<br>
