@@ -1,6 +1,5 @@
 from api import Pokemon,listpokemon,name,weight,height
 from flask import Flask, render_template, request, redirect
-from cs50 import SQL
 import random
 
 
@@ -40,7 +39,7 @@ def search():
 
 	return render_template("pokemon.html",pokedata=pokedata,pokelist=pokelist,bgcolor=bgcolor[n],maxlength=pokenamelength)
 
-@app.route("/random")
+@app.route("/random",methods=["GET","POST"])
 def ran():
 	n = random.randint(0,len(pokelist) - 1)
 	pokedata = Pokemon(pokelist[n]["name"])
