@@ -45,8 +45,6 @@ def Pokemon(pokemon):
 	spdef = int(stats[4]["base_stat"])
 	speed = int(stats[5]["base_stat"])
 
-	total = hp + atk + defense + spatk + spdef + speed
-
 	types_resp = resp2.json()["types"]
 
 	types = []
@@ -111,7 +109,6 @@ def Pokemon(pokemon):
 	else:
 		pokerank = "ordinary"
 
-	# imported the library here because elsewise it showed stupid debug data
 	evolves_into = db.execute("SELECT name FROM evolutions WHERE evolves_from = ?",name)
 	evolvesInto = []
 	for evolve_into in evolves_into:
@@ -135,7 +132,6 @@ def Pokemon(pokemon):
 	pokedata["spatk"] = int(spatk)
 	pokedata["spdef"] = int(spdef)
 	pokedata["speed"] = int(speed)
-	pokedata["total"] = total
 	pokedata["desc"] = description
 	pokedata["height"] = int(height)
 	pokedata["weight"] = int(weight)
