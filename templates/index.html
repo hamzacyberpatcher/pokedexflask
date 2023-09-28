@@ -30,9 +30,16 @@
 			<a href="/"><img src="/static/pokemonbanner.png" alt="" style="width:100%;height:auto;padding:0px;"></a>
 		</header>
 		<main>
+			{% with messages = get_flashed_messages() %}
+   {% if messages %}
+      {% for message in messages %}
+         {{ message }}
+      {% endfor %}
+   {% endif %}
+{% endwith %}
 			<form action="/search">
 				<div class="d-flex align-items-center justify-content-center my-6">
-					<input type="text" class="form-control" style="width:35%;display:inline;" list="pokemons" name="pokemon" autofocus autocomplete="off" placeholder = "Enter Pokemon's name or number">
+					<input type="text" class="form-control" style="width:35%;display:inline;" required list="pokemons" name="pokemon" autofocus autocomplete="off" placeholder = "Enter Pokemon's name or number" required />
 					<datalist id="pokemons" style="height:50px;overflow:auto;">
 					{% for pokename in pokelist %}
 						<option value="{{ pokename["name"] | name }}">{{ pokename["name"] | name }}</option>
