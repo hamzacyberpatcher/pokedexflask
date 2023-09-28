@@ -3,13 +3,21 @@
 	{{ pokedata["name"] | name }}
 {% endblock %}
 {% block favicon %}
-	<link rel="icon" type="image/png" href="{{ pokedata.favicon }}">
+{% if pokedata.favicon != None %}
+			<link rel="icon" type="image/png" href="{{ pokedata.favicon }}">
+			{% else %}
+				<link rel="icon" type="image/png" href="static/notfound.png">
+			{% endif %}
 {% endblock %}
 {% block body %}
 	<div class="row">
 		<div class="col-sm">
 			<center>
+			{% if pokedata.sprite != None %}
 			<img src="{{ pokedata.sprite }}" alt="{{ pokedata.name | name }}" style="width:100%;height:auto">
+			{% else %}
+				<img src="static/notfound.png" alt="{{ pokedata.name | name }}" style="width:100%;height:auto">
+			{% endif %}
 			</center>
 		</div>
 		<div class="col-sm p-5">
