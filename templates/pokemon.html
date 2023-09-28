@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'index.html' %}
 {% block title %}
 	{{ pokedata["name"] | name }}
 {% endblock %}
@@ -6,20 +6,6 @@
 	<link rel="icon" type="image/png" href="{{ pokedata.favicon }}">
 {% endblock %}
 {% block body %}
-		<form action="/search">
-			<div class="d-flex align-items-center justify-content-center my-6">
-			<input type="text" class="form-control" style="width:35%;display:inline;" list="pokemons" name="pokemon" autofocus autocomplete="off" placeholder = "Enter Pokemon's name or number">
-			<datalist id="pokemons" style="height:50px;overflow:auto;">
-			{% for pokename in pokelist %}
-				<option value="{{ pokename["name"] | name }}">{{ pokename["name"] | name }}</option>
-			{% endfor %}
-			</datalist>
-			<button class="btn btn-light mx-2" type="submit">Search</button>
-		</form>
-		<form action="/random" method="post">
-			<button class="btn btn-light my-2 mx-0" type="submit">Random</button>
-		</form>
-	</div>
 	<div class="row">
 		<div class="col-sm">
 			<center>
