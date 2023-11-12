@@ -32,7 +32,7 @@ def index():
 @app.route("/search")
 def search():
 	pokemon = request.args.get("pokemon")
-	pokedata = Pokemon(str(pokemon))
+	pokedata = Pokemon(pokemon)
 	n = random.randint(0,len(bgcolor) - 1)
 	if pokedata == None:
 		return render_template("failure.html",pokemon=pokemon,pokelist=pokelist,bgcolor=bgcolor[n], maxlength = pokenamelength)

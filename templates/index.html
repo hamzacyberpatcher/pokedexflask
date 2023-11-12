@@ -42,7 +42,7 @@
 				</form>
 				<form action="/search" method="get">
 					<button class="btn btn-light my-2 mx-0" type="submit" style="background-color : transparent;border-width: 2px;border-color: darkgray;box-shadow : dimgray;">Random</button>
-					<input type="hidden" value={{ range(1, maxlength + 1) | random }} name  = "pokemon">
+					<input type="hidden" value="{{ range(1, maxlength + 1) | random }}" name  = "pokemon">
 				</form>
 			</div>
 			<article>

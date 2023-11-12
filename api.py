@@ -145,7 +145,6 @@ def listpokemon():
 	return pokelist
 
 def name(value):
-	value = str(value)
 	value = value.capitalize()
 	value = value.replace("-"," ")
 	return value
