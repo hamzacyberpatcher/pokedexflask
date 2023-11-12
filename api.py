@@ -68,7 +68,7 @@ def Pokemon(pokemon):
 				break
 			i = i + 1
 	else:
-		description = "Not Available"
+		description = "Not Available😓😓😢"
 
 	height = resp2.json()["height"]
 	weight = resp2.json()["weight"]
@@ -92,7 +92,7 @@ def Pokemon(pokemon):
 					ability_desc = ability_desc.replace("  "," ")
 					break
 		else:
-			ability_desc = "Not available"
+			ability_desc = "Not available😓😓😢"
 		ability["name"] = ability_resp["ability"]["name"]
 		ability["is_hidden"] = ability_resp["is_hidden"]
 		ability["desc"] = ability_desc
