@@ -1,4 +1,4 @@
-#CS50 FINAL PROJECT Pokedex made using flask 🏁🏁📻🎫
+# CS50 FINAL PROJECT Pokedex made using flask 🏁🏁📻🎫
 
 <h1>Details</h1>
 A pokedex made using python's flask module. Pokemon's data is obtained using
