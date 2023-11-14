@@ -137,7 +137,7 @@ def Pokemon(pokemon):
 	pokedata["weight"] = int(weight)
 	pokedata["abilities"] = abilities
 	pokedata["sprite"] = sprite
-	pokedata["favicon"] = resp2.json()["sprites"]["front_default"]
+	# pokedata["favicon"] = resp2.json()["sprites"]["front_default"]
 	return pokedata
 
 def listpokemon():

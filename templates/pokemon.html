@@ -2,13 +2,6 @@
 {% block title %}
 	{{ pokedata["name"] | name }}
 {% endblock %}
-{% block favicon %}
-{% if pokedata.favicon != None %}
-			<link rel="icon" type="image/png" href="{{ pokedata.favicon }}">
-			{% else %}
-				<link rel="icon" type="image/png" href="static/notfound.png">
-			{% endif %}
-{% endblock %}
 {% block body %}
 	<div class="row">
 		<div class="col-sm">
