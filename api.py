@@ -66,6 +66,7 @@ def Pokemon(pokemon):
 				description = description.replace("\x0c"," ")
 				description = description.replace("  "," ")
 				description = description.replace("\xad ","")
+				description = description.replace("\xad","")
 				break
 			i = i + 1
 	else:
