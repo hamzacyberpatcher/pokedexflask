@@ -38,12 +38,12 @@ def Pokemon(pokemon):
 		evolves_from = "nothing"
 
 	stats = resp2.json()["stats"]
-	hp = int(stats[0]["base_stat"])
-	atk = int(stats[1]["base_stat"])
-	defense = int(stats[2]["base_stat"])
-	spatk = int(stats[3]["base_stat"])
-	spdef = int(stats[4]["base_stat"])
-	speed = int(stats[5]["base_stat"])
+	hp = stats[0]["base_stat"]
+	atk = stats[1]["base_stat"]
+	defense = stats[2]["base_stat"]
+	spatk = stats[3]["base_stat"]
+	spdef = stats[4]["base_stat"]
+	speed = stats[5]["base_stat"]
 
 	types_resp = resp2.json()["types"]
 
@@ -139,7 +139,6 @@ def Pokemon(pokemon):
 	pokedata["weight"] = int(weight)
 	pokedata["abilities"] = abilities
 	pokedata["sprite"] = sprite
-	# pokedata["favicon"] = resp2.json()["sprites"]["front_default"]
 	return pokedata
 
 def listpokemon():
@@ -147,7 +146,7 @@ def listpokemon():
 	return pokelist
 
 def name(value):
-	value = value.capitalize()
+	value = value.title()
 	value = value.replace("-"," ")
 	return value
 
