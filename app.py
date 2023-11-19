@@ -1,5 +1,6 @@
-from api import Pokemon,listpokemon,name,weight,height
+from api import Pokemon,listpokemon
 from flask import Flask, render_template, request, redirect
+from filters import name,weight,height
 import random
 
 
