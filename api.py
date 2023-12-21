@@ -38,12 +38,15 @@ def Pokemon(pokemon):
 		evolves_from = "nothing"
 
 	stats = resp2.json()["stats"]
-	hp = stats[0]["base_stat"]
-	atk = stats[1]["base_stat"]
-	defense = stats[2]["base_stat"]
-	spatk = stats[3]["base_stat"]
-	spdef = stats[4]["base_stat"]
-	speed = stats[5]["base_stat"]
+	if stats:
+		hp = stats[0]["base_stat"]
+		atk = stats[1]["base_stat"]
+		defense = stats[2]["base_stat"]
+		spatk = stats[3]["base_stat"]
+		spdef = stats[4]["base_stat"]
+		speed = stats[5]["base_stat"]
+	else:
+		hp = atk = defense = spatk = spdef = speed = 0
 
 	types_resp = resp2.json()["types"]
 
